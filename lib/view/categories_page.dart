@@ -1,24 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meals/Model/categories_model.dart';
 import 'package:meals/Services/get_all_categories.dart';
 import 'package:go_router/go_router.dart';
 
 import '../widgets/custom_card.dart';
 
-class CategoriesPage extends StatelessWidget {
+class CategoriesPage extends StatefulWidget {
   CategoriesPage({
     super.key,
     this.id,
   });
-  CategoriesModel? categoriesModel;
   final String? id;
+
+
+  @override
+  State<CategoriesPage> createState() => _CategoriesPageState();
+}
+
+class _CategoriesPageState extends State<CategoriesPage> {
+  CategoriesModel? categoriesModel;
+  int CurrentIndex = 0 ; 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: categoriesView(
-        id: id,
+        id: widget.id,
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: CurrentIndex,
+        onTap: (index) => setState(() => CurrentIndex = index ) ,
+        items: [BottomNavigationBarItem(
+          icon:FaIcon(FontAwesomeIcons.house),
+        label: "Home" , 
+        backgroundColor: Colors.orange ) , 
+        BottomNavigationBarItem(
+          icon:FaIcon(FontAwesomeIcons.heart),
+        label: "Favorite" , 
+        backgroundColor: Colors.orange , 
+
+        
+        ), BottomNavigationBarItem(
+          icon:FaIcon(FontAwesomeIcons.user),
+        label: "Profile" , 
+        backgroundColor: Colors.orange , 
+
+        
+        )
+        
+        ]),
     );
   }
 }
@@ -58,8 +89,11 @@ class categoriesView extends StatelessWidget {
                       String id = categories[index].strCategory!;
                       context.go('/Meals/$id');
                     },
-                    child: CustomCard(
-                      categoriesModel: categories[index],
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24 , vertical: 24) ,
+                      child: CustomCard(
+                        categoriesModel: categories[index],
+                      ),
                     ),
                   );
                 });

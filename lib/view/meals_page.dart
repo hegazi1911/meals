@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:meals/Model/meals_model.dart';
 import 'package:meals/Services/get_all_meal.dart';
-import 'package:meals/widgets/custom_card_meals.dart';
 import 'package:go_router/go_router.dart';
+import 'package:meals/widgets/custom_card_meals.dart';
 
 import '../Model/categories_model.dart';
 
@@ -13,8 +13,13 @@ class MealsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: MealsView(),
-    );
+      appBar: AppBar(title: Text("Meals"),),
+      body:
+      
+           MealsView(),
+         
+       );
+  
   }
 }
 
@@ -41,24 +46,24 @@ class MealsView extends StatelessWidget {
             final data = snapshot.data;
             List<MealModel> meals = snapshot.data!;
             return GridView.builder(
-                itemCount: meals.length,
-                clipBehavior: Clip.none,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1,
-                    crossAxisSpacing: 0.5,
-                    mainAxisSpacing: 0.5),
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      String id = meals[index].idMeal!;
-                      context.go('/detalies/$id');
-                    },
-                    child: CustomMealCard(
-                      mealModel: meals[index],
-                    ),
-                  );
-                });
+              itemCount: meals.length,
+              clipBehavior: Clip.none,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1,
+                  crossAxisSpacing: 0.5,
+                  mainAxisSpacing: 0.5),
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    String id = meals[index].idMeal!;
+                    context.go('/detalies/$id');
+                  },
+                  child: customCardDD(
+                    mealModel: meals[index],
+                  ),
+                );
+              });
             ;
           } else {
             return Text(

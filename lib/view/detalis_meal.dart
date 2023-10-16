@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals/Services/get_detalies.dart';
+import 'package:meals/widgets/custom_detalies.dart';
 
 import '../Model/detalies_model.dart';
 
@@ -27,7 +28,7 @@ class DetaliesView extends StatelessWidget {
     final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final MealId = routeArgs['id'];
-    return FutureBuilder<List<DetaliesModel>>(
+    return FutureBuilder<DetaliesModel>(
         future: GetDetalies().getAllDetalies(id: MealId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -40,12 +41,13 @@ class DetaliesView extends StatelessWidget {
           } else if (snapshot.hasData) {
             // Use the data from the future to build your widget.
             final data = snapshot.data;
-            List<DetaliesModel> detalie = snapshot.data!;
-            return Container(
-              child: Column(
-                children: [Text(detaliesModel!.strCategory!)],
+            DetaliesModel detalie = snapshot.data! ;
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16 , vertical: 16),
+                child: CustomDetalies(detaliesModel: detalie , ),
               ),
-            );
+            ) ;
           } else {
             return Center(child: CircularProgressIndicator());
           }

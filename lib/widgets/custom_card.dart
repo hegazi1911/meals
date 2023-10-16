@@ -9,9 +9,9 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 200,
-      height: 150,
+      height: 100,
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.orange, style: BorderStyle.solid),
+          border: Border.all(color: Colors.orange, style: BorderStyle.solid ),
           boxShadow: [
             BoxShadow(
                 blurRadius: 40,
@@ -21,9 +21,14 @@ class CustomCard extends StatelessWidget {
           ]),
       child: Column(
         children: [
+          SizedBox(height: 16,) , 
           Image.network(categoriesModel.strCategoryThumb!),
-          Text(categoriesModel.strCategory!),
-          Text(categoriesModel.strCategoryDescription!.substring(0, 40)),
+                    SizedBox(height: 16,) , 
+
+          Text(categoriesModel.strCategory! , style: TextStyle(fontSize: 28 , fontWeight:FontWeight.bold , color: Colors.orange),),
+                    SizedBox(height: 16,) , 
+
+          Text(categoriesModel.strCategoryDescription!.substring(0, 40), style: TextStyle(),),
         ],
       ),
     );
