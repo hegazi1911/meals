@@ -1,8 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meals/Model/categories_model.dart';
 import 'package:meals/Services/get_all_categories.dart';
 import 'package:go_router/go_router.dart';
+import 'package:meals/view/Screen%20Bottom%20Navigationbar/favorite_screen.dart';
+import 'package:meals/view/Screen%20Bottom%20Navigationbar/profile.dart';
 
 import '../widgets/custom_card.dart';
 
@@ -19,22 +22,34 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
+     String? id;
+
   CategoriesModel? categoriesModel;
   int CurrentIndex = 0 ; 
+final Screen = [
+categoriesView(),
+FavoriteScreen(),
+ProfileScreen()
 
+] ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: categoriesView(
-        id: widget.id,
-      ),
+      body: Screen[CurrentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor:Colors.orange,
+        type: BottomNavigationBarType.fixed,
+       selectedItemColor: Colors.white,
+       iconSize: 40,
+       showUnselectedLabels: false,
+       unselectedItemColor: Color.fromARGB(255, 255, 224, 177),
         currentIndex: CurrentIndex,
         onTap: (index) => setState(() => CurrentIndex = index ) ,
-        items: [BottomNavigationBarItem(
+        items: [const BottomNavigationBarItem(
           icon:FaIcon(FontAwesomeIcons.house),
         label: "Home" , 
-        backgroundColor: Colors.orange ) , 
+        backgroundColor: Colors.orange ) ,
+
         BottomNavigationBarItem(
           icon:FaIcon(FontAwesomeIcons.heart),
         label: "Favorite" , 
@@ -55,7 +70,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
 }
 
 class categoriesView extends StatelessWidget {
-  categoriesView({super.key, this.categoriesModel, required this.id});
+  categoriesView({super.key, this.categoriesModel,  this.id});
   CategoriesModel? categoriesModel;
   final String? id;
 
