@@ -10,8 +10,8 @@ class GetAllCategoriesServices {
 
     List<CategoriesModel> catlist = [];
 
-    for (var i = 0; i < data.length; i++) {
-      catlist.add(CategoriesModel.fromJson(data[i]));
+    for (var i = 0; i < data['categories'].length; i++) {
+      catlist.add(CategoriesModel.fromJson(data['categories'][i]));
     }
     print(data);
     return catlist;

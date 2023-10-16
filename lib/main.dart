@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meals/view/categories_page.dart';
+import 'package:meals/view/detalis_meal.dart';
+import 'package:meals/view/meals_page.dart';
 import 'package:meals/view/rigester_page.dart';
 // ignore: depend_on_referenced_packages
 import 'package:firebase_core/firebase_core.dart';
@@ -24,8 +26,20 @@ final _router = GoRouter(
         builder: (context, state) => singInPage(),
       ),
       GoRoute(
-        path: 'categories',
+        path: 'categories/:id',
         builder: (context, State) => CategoriesPage(),
+      ),
+      GoRoute(
+        path: 'Meals/:id',
+        builder: (context, state) => MealsPage(
+          id: state.pathParameters["id"],
+        ),
+      ),
+      GoRoute(
+        path: 'detalies/:id',
+        builder: (context, state) => DetaliesMeal(
+          id: state.pathParameters["id"],
+        ),
       )
     ]),
   ],
