@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/Model/meals_model.dart';
+import 'package:meals/RivirPod/changenotifair.dart';
+
 class customCardDD extends StatelessWidget {
   customCardDD({required this.mealModel});
   MealModel mealModel;
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +44,10 @@ class customCardDD extends StatelessWidget {
                       children: [
                        
                         IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.favorite,
-                              color: Colors.red,
-                            ))
+                            onPressed: () {
+                              onFavoritePress(mealModel) ; 
+                            },
+                            icon: getIcon(mealModel))
                       ],
                     )
                   ]),

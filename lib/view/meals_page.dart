@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
 import 'package:meals/Model/meals_model.dart';
+import 'package:meals/RivirPod/changenotifair.dart';
 import 'package:meals/Services/get_all_meal.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meals/widgets/custom_card_meals.dart';
@@ -22,16 +25,20 @@ class MealsPage extends StatelessWidget {
   
   }
 }
+final iconNotifier = ChangeNotifierProvider<IconNotifier>((ref) => IconNotifier());
 
-class MealsView extends StatelessWidget {
+
+class MealsView extends ConsumerWidget {
   const MealsView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context , ref) {
+    final iconChange = ref;
     final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final categoryId = routeArgs['id'];
-    return FutureBuilder<List<MealModel>>(
+    return 
+    FutureBuilder<List<MealModel>>(
         future: GetAllMeals().getallmeals(categories: categoryId!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

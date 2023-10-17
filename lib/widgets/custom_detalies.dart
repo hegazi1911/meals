@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meals/Model/categories_model.dart';
 import 'package:meals/Model/detalies_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:meals/Model/meals_model.dart';
+import 'package:meals/RivirPod/changenotifair.dart';
 import 'package:meals/widgets/decrabtion_text_fild.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
 
-
-class CustomDetalies extends StatelessWidget {
+class CustomDetalies extends StatefulWidget {
    CustomDetalies({super.key , required this.detaliesModel});
 DetaliesModel detaliesModel ;
+
+  @override
+  State<CustomDetalies> createState() => _CustomDetaliesState();
+}
+
+class _CustomDetaliesState extends State<CustomDetalies> {
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
      
 child: Column(children: [
   SizedBox(height: 16,) , 
- carddetalesmeal(detaliesModel: detaliesModel,),
+ carddetalesmeal(detaliesModel: widget.detaliesModel,),
 SizedBox(height: 18,), 
 Container(
     decoration: BoxDecoration(
@@ -41,20 +52,20 @@ Container(
               Column(
               
                 children: [
-                  Text(detaliesModel.strIngredient1! ,style: TextStyle(fontSize: 20 , color: Colors.orange , fontWeight: FontWeight.bold),),
-                  Text(detaliesModel.strIngredient2! , style: TextStyle(fontSize: 20 , color: Colors.orange , fontWeight: FontWeight.bold)),
-                  Text(detaliesModel.strIngredient3!, style: TextStyle(fontSize: 20 , color: Colors.orange , fontWeight: FontWeight.bold)),
-                  Text(detaliesModel.strIngredient4! ,  style: TextStyle(fontSize: 20 , color: Colors.orange , fontWeight: FontWeight.bold)),
-                   Text(detaliesModel.strIngredient5! , style: TextStyle(fontSize: 20 , color: Colors.orange , fontWeight: FontWeight.bold)),
+                  Text(widget.detaliesModel.strIngredient1! ,style: TextStyle(fontSize: 20 , color: Colors.orange , fontWeight: FontWeight.bold),),
+                  Text(widget.detaliesModel.strIngredient2! , style: TextStyle(fontSize: 20 , color: Colors.orange , fontWeight: FontWeight.bold)),
+                  Text(widget.detaliesModel.strIngredient3!, style: TextStyle(fontSize: 20 , color: Colors.orange , fontWeight: FontWeight.bold)),
+                  Text(widget.detaliesModel.strIngredient4! ,  style: TextStyle(fontSize: 20 , color: Colors.orange , fontWeight: FontWeight.bold)),
+                   Text(widget.detaliesModel.strIngredient5! , style: TextStyle(fontSize: 20 , color: Colors.orange , fontWeight: FontWeight.bold)),
                 ],
               ),
               Column(
                 children: [
-                  Text(detaliesModel.strMeasure1! ,  style: TextStyle(fontSize: 20),),
-                  Text(detaliesModel.strMeasure2!,  style: TextStyle(fontSize: 20)),
-                  Text(detaliesModel.strMeasure3!, style: TextStyle(fontSize: 20)),
-                  Text(detaliesModel.strMeasure4! ,  style: TextStyle(fontSize: 20)),
-                  Text(detaliesModel.strMeasure5! ,  style: TextStyle(fontSize: 20)),
+                  Text(widget.detaliesModel.strMeasure1! ,  style: TextStyle(fontSize: 20),),
+                  Text(widget.detaliesModel.strMeasure2!,  style: TextStyle(fontSize: 20)),
+                  Text(widget.detaliesModel.strMeasure3!, style: TextStyle(fontSize: 20)),
+                  Text(widget.detaliesModel.strMeasure4! ,  style: TextStyle(fontSize: 20)),
+                  Text(widget.detaliesModel.strMeasure5! ,  style: TextStyle(fontSize: 20)),
         
                 ],
               )
@@ -63,12 +74,12 @@ Container(
         ) , 
         SizedBox(height: 16,) , 
 
-        Text(detaliesModel.strMeal! ,
+        Text(widget.detaliesModel.strMeal! ,
        style: TextStyle(fontSize: 18 , 
        fontWeight:FontWeight.bold , 
       color: Colors.orange,), ),
 SizedBox(height: 16,) , 
-DescriptionTextWidget(text: detaliesModel.strInstructions! , ),
+DescriptionTextWidget(text: widget.detaliesModel.strInstructions! , ),
       ],
     ),
 ), )

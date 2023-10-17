@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals/Model/meals_model.dart';
 import 'package:meals/view/categories_page.dart';
 import 'package:meals/view/detalis_meal.dart';
 import 'package:meals/view/meals_page.dart';
@@ -9,8 +10,13 @@ import 'package:meals/view/sing_in.dart';
 import 'firebase_options.dart';
 // ignore: depend_on_referenced_packages
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() async {
+ void main() async {
+ await Hive.initFlutter(  ) ; 
+  Hive.registerAdapter(MealModelAdapter());
+
+ await Hive.openBox('favorite');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
