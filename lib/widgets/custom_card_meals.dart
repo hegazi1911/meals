@@ -1,3 +1,4 @@
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
@@ -6,10 +7,8 @@ import 'package:meals/Model/meals_model.dart';
 import 'package:meals/RivirPod/changenotifair.dart';
 
 class customCardDD extends StatelessWidget {
-  customCardDD({required this.mealModel});
+  customCardDD({required this.mealModel ,  } );
   MealModel mealModel;
-
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -43,11 +42,19 @@ class customCardDD extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                        
-                        IconButton(
-                            onPressed: () {
-                              onFavoritePress(mealModel) ; 
-                            },
-                            icon: getIcon(mealModel))
+                        FavoriteButton(
+                          isFavorite: false,
+            valueChanged: (_isFavorite) async{
+              if(_isFavorite == true) { 
+                     await favorite.delete(mealModel);
+
+              }else{
+                   await favorite.add( mealModel);
+
+              }
+              print('Is Favorite $_isFavorite)');
+            },
+          )
                       ],
                     )
                   ]),

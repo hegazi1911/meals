@@ -25,16 +25,20 @@ class MealsPage extends StatelessWidget {
   
   }
 }
-final iconNotifier = ChangeNotifierProvider<IconNotifier>((ref) => IconNotifier());
-
+final iconNotifier = StateProvider<Color>((ref) 
+{
+  return Colors.red ; 
+},);
 
 class MealsView extends ConsumerWidget {
   const MealsView({super.key});
 
   @override
   Widget build(BuildContext context , ref) {
-    final iconChange = ref;
-    final routeArgs =
+      final Box favorite = Hive.box('favorite');
+ var icon = ref.watch(iconNotifier) ; 
+    final MealModel mealModel ;
+        final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final categoryId = routeArgs['id'];
     return 
@@ -52,6 +56,7 @@ class MealsView extends ConsumerWidget {
             // Use the data from the future to build your widget.
             final data = snapshot.data;
             List<MealModel> meals = snapshot.data!;
+
             return GridView.builder(
               itemCount: meals.length,
               clipBehavior: Clip.none,
@@ -68,6 +73,18 @@ class MealsView extends ConsumerWidget {
                   },
                   child: customCardDD(
                     mealModel: meals[index],
+// onPressed: () async{ 
+                      
+// if( favorite.get(index)!= null){
+//      await favorite.delete(index);
+// ref.read(iconNotifier.notifier).update((state) => Colors.orange,) ;
+// }else{
+//    await favorite.put(index, meals);
+//   ref.read(iconNotifier.notifier).update((state) => Colors.red ,) ;
+
+// }
+
+//                      },  
                   ),
                 );
               });

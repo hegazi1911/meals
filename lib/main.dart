@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/Model/meals_model.dart';
 import 'package:meals/view/categories_page.dart';
 import 'package:meals/view/detalis_meal.dart';
@@ -21,7 +22,7 @@ import 'package:hive_flutter/hive_flutter.dart';
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MealsApp());
+  runApp( ProviderScope(child: MealsApp()));
 }
 
 final _router = GoRouter(
