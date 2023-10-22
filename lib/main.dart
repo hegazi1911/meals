@@ -17,7 +17,8 @@ import 'package:hive_flutter/hive_flutter.dart';
  void main() async {
  await Hive.initFlutter(  ) ; 
   Hive.registerAdapter(MealHiveModelAdapter());
-//  await Hive.openBox<MealHiveModel>('favorite');
+ await Hive.openBox<MealHiveModel>('favorite');
+ 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:meals/Model/meal_hive_model.dart';
-import 'package:meals/Model/meals_model.dart';
-import 'package:meals/RivirPod/changenotifair.dart';
 
 class customhiveCardDD extends StatelessWidget {
   customhiveCardDD({required this.mealHiveModel ,  } );
@@ -44,11 +42,11 @@ MealHiveModel mealHiveModel ;
                       children: [
                        
                         FavoriteButton(
-                          isFavorite: false,
+                          isFavorite: true,
                           
             valueChanged: (_isFavorite) {
-             if(_isFavorite){
-              favorite.put(mealHiveModel.idMeal , MealHiveModel());
+             if(!_isFavorite){
+              favorite.delete(mealHiveModel.idMeal );
              }
             },
           )

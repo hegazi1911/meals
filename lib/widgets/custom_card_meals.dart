@@ -49,7 +49,8 @@ class customCardDD extends StatelessWidget {
                           
             valueChanged: (_isFavorite) {
              if(_isFavorite){
-              favorite.put(mealModel.idMeal , MealHiveModel());
+              favorite.put(mealModel.idMeal , MealHiveModel(idMeal: mealModel.idMeal , strMeal: mealModel.strMeal , strMealThumb: mealModel.strMealThumb));
+
              }
             },
           )
