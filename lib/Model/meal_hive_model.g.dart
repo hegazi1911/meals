@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'meals_model.dart';
+part of 'meal_hive_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MealModelAdapter extends TypeAdapter<MealModel> {
+class MealHiveModelAdapter extends TypeAdapter<MealHiveModel> {
   @override
   final int typeId = 0;
 
   @override
-  MealModel read(BinaryReader reader) {
+  MealHiveModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return MealModel(
+    return MealHiveModel(
       strMeal: fields[0] as String?,
       strMealThumb: fields[1] as String?,
       idMeal: fields[2] as String?,
@@ -24,7 +24,7 @@ class MealModelAdapter extends TypeAdapter<MealModel> {
   }
 
   @override
-  void write(BinaryWriter writer, MealModel obj) {
+  void write(BinaryWriter writer, MealHiveModel obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)
@@ -41,7 +41,7 @@ class MealModelAdapter extends TypeAdapter<MealModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MealModelAdapter &&
+      other is MealHiveModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

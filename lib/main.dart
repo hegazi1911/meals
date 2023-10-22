@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meals/Model/meal_hive_model.dart';
 import 'package:meals/Model/meals_model.dart';
 import 'package:meals/view/categories_page.dart';
 import 'package:meals/view/detalis_meal.dart';
@@ -15,9 +16,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 
  void main() async {
  await Hive.initFlutter(  ) ; 
-  Hive.registerAdapter(MealModelAdapter());
-
- await Hive.openBox('favorite');
+  Hive.registerAdapter(MealHiveModelAdapter());
+//  await Hive.openBox<MealHiveModel>('favorite');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

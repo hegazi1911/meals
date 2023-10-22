@@ -30,13 +30,11 @@ final iconNotifier = StateProvider<Color>((ref)
   return Colors.red ; 
 },);
 
-class MealsView extends ConsumerWidget {
+class MealsView extends StatelessWidget {
   const MealsView({super.key});
 
   @override
-  Widget build(BuildContext context , ref) {
-      final Box favorite = Hive.box('favorite');
- var icon = ref.watch(iconNotifier) ; 
+  Widget build(BuildContext context ) {
     final MealModel mealModel ;
         final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;

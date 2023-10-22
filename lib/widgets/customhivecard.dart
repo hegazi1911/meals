@@ -6,10 +6,9 @@ import 'package:meals/Model/meal_hive_model.dart';
 import 'package:meals/Model/meals_model.dart';
 import 'package:meals/RivirPod/changenotifair.dart';
 
-class customCardDD extends StatelessWidget {
-  customCardDD({required this.mealModel ,  } );
-  MealModel mealModel;
-
+class customhiveCardDD extends StatelessWidget {
+  customhiveCardDD({required this.mealHiveModel ,  } );
+MealHiveModel mealHiveModel ; 
   @override
   Widget build(BuildContext context) {
  final favorite =  Hive.box<MealHiveModel>('favorite') ; 
@@ -34,7 +33,7 @@ class customCardDD extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text (
-                      mealModel.strMeal!,
+                      mealHiveModel.strMeal!,
                               overflow: TextOverflow.ellipsis,
   
 
@@ -49,7 +48,7 @@ class customCardDD extends StatelessWidget {
                           
             valueChanged: (_isFavorite) {
              if(_isFavorite){
-              favorite.put(mealModel.idMeal , MealHiveModel());
+              favorite.put(mealHiveModel.idMeal , MealHiveModel());
              }
             },
           )
@@ -63,7 +62,7 @@ class customCardDD extends StatelessWidget {
           left: 80,
           bottom: 160,
           child: Image.network(
-            mealModel.strMealThumb!,
+            mealHiveModel.strMealThumb!,
             height: 100,
             width: 100,
           ),

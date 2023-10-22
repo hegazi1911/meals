@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:meals/Model/meal_hive_model.dart';
 import 'package:meals/Model/meals_model.dart';
+import 'package:meals/RivirPod/changenotifair.dart';
 import 'package:meals/Services/get_all_meal.dart';
 import 'package:meals/view/meals_page.dart';
 import 'package:meals/widgets/custom_card_meals.dart';
 import 'package:go_router/go_router.dart';
+import 'package:meals/widgets/customhivecard.dart';
 
-class FavoriteScreen extends ConsumerWidget {
+class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});
 
   @override
-  Widget build(BuildContext context , ref) {
-    final Box favorite = Hive.box('favorite');
-List<dynamic> mealList = favorite.values.toList() ; 
- var icon = ref.watch(iconNotifier) ; 
+  Widget build(BuildContext context ) {
+
+
         final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final categoryId = routeArgs['id'];
@@ -23,8 +25,8 @@ List<dynamic> mealList = favorite.values.toList() ;
       body: 
        
     
-    FutureBuilder<List<MealModel>>(
-        future: GetAllMeals().getallmeals(categories: categoryId!),
+    FutureBuilder<List<MealHiveModel>>(
+        future:  fetchFavoriteMeals() ,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
@@ -35,9 +37,9 @@ List<dynamic> mealList = favorite.values.toList() ;
                 'Error: ${snapshot.error}'); // Display an error message if the future encountered an error.
           } else if (snapshot.hasData) {
             // Use the data from the future to build your widget.
-            List<MealModel> meals = snapshot.data!;
+            List<MealHiveModel> meals = snapshot.data!;
             return GridView.builder(
-              itemCount: mealList.length ,
+              itemCount: meals.length ,
               clipBehavior: Clip.none,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -50,8 +52,8 @@ List<dynamic> mealList = favorite.values.toList() ;
                     String id = meals[index].idMeal!;
                     context.go('/detalies/$id');
                   },
-                  child: customCardDD(
-                    mealModel: meals[index], 
+                  child: customhiveCardDD(
+                   mealHiveModel: meals[index], 
                   ),
                 );
               });
