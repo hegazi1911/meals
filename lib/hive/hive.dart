@@ -7,3 +7,4 @@ Future<List<MealHiveModel>> fetchFavoriteMeals() async {
   List<MealHiveModel> favoriteMeals = dynamicList.map((item) => item as MealHiveModel).toList();
   return favoriteMeals;
 }
+

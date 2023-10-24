@@ -1,15 +1,23 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:meals/Model/meal_hive_model.dart';
+import 'package:meals/riverpod/change_notifire_hive.dart';
 
-class customhiveCardDD extends StatelessWidget {
+class customhiveCardDD extends ConsumerWidget {
   customhiveCardDD({required this.mealHiveModel ,  } );
 MealHiveModel mealHiveModel ; 
+
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context , WidgetRef ref) {
+            final listFav = ref.watch(listFavHiveProvider);
+
  final favorite =  Hive.box<MealHiveModel>('favorite') ; 
+   List<bool> _isFavorited = List.filled(favorite.length, false);
+
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -40,16 +48,22 @@ MealHiveModel mealHiveModel ;
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                       
-                        FavoriteButton(
-                          isFavorite: true,
+                       IconButton(onPressed:
+                     () {
+                                      ref
+                                          .read(listFavHiveProvider.notifier)
+                                          .removeFromFavHive(mealHiveModel);
+                                    },
+icon:Icon(Icons.favorite , color:Colors.red,size: 32, ))
+          //               FavoriteButton(
+          //                 isFavorite: true,
                           
-            valueChanged: (_isFavorite) {
-             if(!_isFavorite){
-              favorite.delete(mealHiveModel.idMeal );
-             }
-            },
-          )
+          //   valueChanged: (_isFavorite) {
+          //    if(!_isFavorite){
+          //     favorite.delete(mealHiveModel.idMeal );
+          //    }
+          //   },
+          // )
                       ],
                     )
                   ]),

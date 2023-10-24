@@ -8,8 +8,11 @@ class MealHiveModel extends HiveObject{
   final String? strMealThumb;
     @HiveField(2)
   final String? idMeal;
+    @HiveField(3)
+     bool? isFavorite = true;
 
   MealHiveModel({
+    this.isFavorite, 
     this.strMeal,
     this.strMealThumb,
     this.idMeal,

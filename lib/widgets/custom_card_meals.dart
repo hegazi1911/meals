@@ -1,17 +1,22 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:meals/Model/meal_hive_model.dart';
 import 'package:meals/Model/meals_model.dart';
-import 'package:meals/RivirPod/changenotifair.dart';
+import 'package:meals/hive/hive.dart';
+import 'package:meals/riverpod/change_notifire.dart';
 
-class customCardDD extends StatelessWidget {
-  customCardDD({required this.mealModel ,  } );
+class customCardDD extends ConsumerWidget {
+  customCardDD( {required this.mealModel , } );
   MealModel mealModel;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context , WidgetRef ref)  {
+    MealHiveModel? mealHiveModel ; 
+        final listFav = ref.watch(listFavProvider);
+
  final favorite =  Hive.box<MealHiveModel>('favorite') ; 
     return Stack(
       clipBehavior: Clip.none,
@@ -43,17 +48,40 @@ class customCardDD extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                       IconButton(onPressed: 
+                       mealModel.isFavorite!
                        
-                        FavoriteButton(
-                          isFavorite: false,
+                              ? () {
+                                        ref
+                                            .read(listFavProvider.notifier)
+                                            .removeFromFav(mealModel);
+                                    }
+                                  : () {
+                                      ref
+                                          .read(listFavProvider.notifier)
+                                          .addToFav(mealModel);
+                                    },
+                        icon:mealModel.isFavorite! ? const Icon(
+                                      Icons.favorite,
+                                      size: 32,
+                                      color: Colors.red,
+                                    )
+                                  : Icon(
+                                      Icons.favorite_outline,
+                                      size: 32,
+                                      color: Colors.grey.shade600,
+                                    ),)
+                       
+          //               FavoriteButton(
+          //                 isFavorite:false, 
                           
-            valueChanged: (_isFavorite) {
-             if(_isFavorite){
-              favorite.put(mealModel.idMeal , MealHiveModel(idMeal: mealModel.idMeal , strMeal: mealModel.strMeal , strMealThumb: mealModel.strMealThumb));
-
-             }
-            },
-          )
+          //   valueChanged: (_isFavorite) {
+          //    if(_isFavorite){
+          //     favorite.put(mealModel.idMeal , MealHiveModel(idMeal: mealModel.idMeal , strMeal: mealModel.strMeal , strMealThumb: mealModel.strMealThumb ,isFavorite: mealModel.isFavorite));
+              
+          //    }
+          //   },
+          // )
                       ],
                     )
                   ]),

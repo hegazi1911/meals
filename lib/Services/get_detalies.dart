@@ -7,7 +7,7 @@ Future <DetaliesModel> getAllDetalies ({required String? id}) async{
      DetaliesModel detailsModel = DetaliesModel.fromJson(data['meals'][0]) ;
 
   return detailsModel;
-  ; 
+  
 }
 
 
