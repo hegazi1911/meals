@@ -10,12 +10,17 @@ class Api {
     if (token != null) {
       headrs.addAll({"Authorization": "Bearer $token"});
     }
+    try{
     http.Response response = await http.get(Uri.parse(url), headers: headrs);
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
       throw Exception("there is a proplem whith status code ${response.body}");
+    }}catch (e) {
+
+      const Text("check your internet" );
     }
+
   }
 
   Future<dynamic> post({

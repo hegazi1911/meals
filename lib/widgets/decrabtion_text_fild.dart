@@ -37,14 +37,14 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
           ? Text(firstHalf!)
           :  Column(
               children: <Widget>[
-                Text(flag ? (firstHalf! + "...") : (firstHalf! + secondHalf!) , style: TextStyle(fontSize: 20),overflow: TextOverflow.clip,),
+                Text(flag ? ("${firstHalf!}...") : (firstHalf! + secondHalf!) , style: const TextStyle(fontSize: 20),overflow: TextOverflow.clip,),
                 InkWell(
                   child:  Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Text(
                         flag ? "show more" : "show less",
-                        style: new TextStyle(color: Colors.orange ,  fontSize:20 , ),
+                        style: const TextStyle(color: Colors.orange ,  fontSize:20 , ),
                       ),
                     ],
                   ),

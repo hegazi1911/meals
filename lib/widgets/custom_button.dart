@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class customButton extends StatelessWidget {
-  const customButton(
+class CustomButton extends StatelessWidget {
+  const CustomButton(
       {super.key, this.onTap, this.isLoading = false, required this.title});
   final void Function()? onTap;
   final bool isLoading;

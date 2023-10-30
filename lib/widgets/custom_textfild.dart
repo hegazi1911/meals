@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class CussstomTextFild extends StatelessWidget {
   const CussstomTextFild(
-      {super.key, required this.hint, this.MaxLine = 1, this.onchange});
+      {super.key, required this.hint, this.mxLine = 1, this.onchange});
   final String hint;
-  final int MaxLine;
+  final int mxLine;
 
   final void Function(String?)? onchange;
   @override
@@ -18,7 +18,7 @@ class CussstomTextFild extends StatelessWidget {
         return null;
       },
       cursorColor: Colors.black12,
-      maxLines: MaxLine,
+      maxLines: mxLine,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: const TextStyle(color: Colors.orange),
