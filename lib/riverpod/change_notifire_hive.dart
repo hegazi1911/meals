@@ -19,8 +19,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 //   }
 // }
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:meals/Model/meal_hive_model.dart';
 import 'package:meals/Model/meals_model.dart';
 import 'package:meals/hive/hive.dart';
 
@@ -31,9 +29,9 @@ mealModel.isFavorite = isFavorite ;
   notifyListeners() ; 
  }
  void removeFavorite(MealHiveModel , bool isFavorite){ 
-  fetchFavoriteMeals();
   MealHiveModel.isFavorite=isFavorite ; 
-  
+    fetchFavoriteMeals();
+
   notifyListeners() ; 
  }
 }

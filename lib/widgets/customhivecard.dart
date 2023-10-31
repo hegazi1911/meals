@@ -51,9 +51,10 @@ MealHiveModel? mealHiveModel ;
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                       IconButton(onPressed:(){
-                        favorite.delete(mealHiveModel) ; 
-                        iconc.removeFavorite(mealHiveModel , false);
+                       IconButton(onPressed:()async{
+                        if(mealHiveModel!.isFavorite = false){
+                       await favorite.delete(mealHiveModel) ; 
+                        iconc.removeFavorite(mealHiveModel , false);}
 
                        }
                     ,
